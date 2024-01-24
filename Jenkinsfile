@@ -16,12 +16,14 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                echo 'Running tests...'
-                sh 'pip3 install -r requirements.txt'
-                sh 'pytest -s'
-            }
+        steps {
+            echo 'Running tests...'
+            sh 'pip3 install -r requirements.txt'
+            sh 'pip3 install pytest'
+            sh 'pytest -s'
         }
+    }
+
 
         stage('Deploy') {
             steps {
