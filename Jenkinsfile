@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker image...'
-                    docker.build('shravani10k/hey-python-flask:0.0.1.RELEASE')
+                    sh 'docker build -t shravani10k/hey-python-flask:0.0.1.RELEASE .'
                 }
             }
         }
