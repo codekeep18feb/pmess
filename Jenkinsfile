@@ -11,13 +11,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo 'Stopping all Docker containers...'
-                    // sh 'docker stop $(docker ps -q)'
+                    echo 'Stopping running Docker containers...'
+                    sh 'if [ "$(docker ps -q)" ]; then docker stop $(docker ps -q); fi'
                     echo 'Building Docker image...'
                     sh 'docker build -t shravani10k/hey-python-flask:0.0.1.RELEASE .'
                 }
             }
         }
+
 
         stage('Test') {
             steps {
