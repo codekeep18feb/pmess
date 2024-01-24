@@ -23,7 +23,7 @@ pipeline {
                
                     echo 'Running tests...'
                     sh 'pip3 install -r requirements.txt'
-                    sh 'pytest -s'
+                    sh 'python3 -m pytest -s'
                   
             
             }
