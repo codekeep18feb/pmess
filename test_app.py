@@ -6,7 +6,7 @@ def test_hello():
     response = client.get("/")
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 200
-    assert data['message'] == 'Hey there Python'
+    assert data['message'] == 'Hey there Python updated!'
 
 def test_health():
     client = app.test_client()
