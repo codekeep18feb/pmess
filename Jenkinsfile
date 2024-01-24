@@ -22,10 +22,9 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
-                    docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
-                        sh 'pip3 install -r requirements.txt'
-                        sh 'pytest -s'
-                    }
+                    sh 'pip3 install -r requirements.txt'
+                    sh 'pytest -s'
+                  
                 }
             }
         }
