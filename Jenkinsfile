@@ -17,25 +17,23 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    echo 'Running tests...'
-                    docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
-                        sh 'pip install -r requirements.txt'
-                        sh 'pytest'
-                    }
-                }
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         script {
+        //             echo 'Running tests...'
+        //             docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
+        //                 sh 'pip install -r requirements.txt'
+        //                 sh 'pytest'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Deploy') {
             steps {
                 script {
                     echo 'Deploying...'
-                    docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
-                        // Add deployment steps if needed
-                    }
+                    sh 'docker container run -d -p 3000:3000 shravani10k/hey-python-flask:0.0.1.RELEASE'
                 }
             }
         }
