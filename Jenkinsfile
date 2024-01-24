@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+    agent {label "jenkins_slave1_pynode"}
+
 
     stages {
         stage('Checkout') {
@@ -17,17 +18,17 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         script {
-        //             echo 'Running tests...'
-        //             docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
-        //                 sh 'pip3 install -r requirements.txt'
-        //                 sh 'pytest -s'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                script {
+                    echo 'Running tests...'
+                    docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
+                        sh 'pip3 install -r requirements.txt'
+                        sh 'pytest -s'
+                    }
+                }
+            }
+        }
 
         stage('Deploy') {
             steps {
