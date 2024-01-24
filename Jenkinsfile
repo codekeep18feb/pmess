@@ -13,6 +13,7 @@ pipeline {
             steps {
                 // Build your Docker image
                 script {
+                    echo 'Building Docker image...'
                     docker.build('shravani10k/hey-python-flask:0.0.1.RELEASE')
                 }
             }
@@ -22,6 +23,7 @@ pipeline {
             steps {
                 // Run your tests
                 script {
+                    echo 'Running tests...'
                     docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
                         sh 'your test commands here'
                     }
@@ -33,6 +35,7 @@ pipeline {
             steps {
                 // Deploy your application
                 script {
+                    echo 'Deploying...'
                     docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
                         sh 'your deployment commands here'
                     }
