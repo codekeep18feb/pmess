@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying...'
-                    sh 'docker container run -d -p 3001:3001 shravani10k/hey-python-flask:0.0.1.RELEASE'
+                    sh 'docker container run -d -p 3001:3000 shravani10k/hey-python-flask:0.0.1.RELEASE'
                 }
             }
         }
