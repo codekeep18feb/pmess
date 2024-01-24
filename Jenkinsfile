@@ -19,7 +19,6 @@ pipeline {
             }
         }
 
-
         stage('Test') {
             steps {
                 script {
@@ -38,7 +37,6 @@ pipeline {
                 }
             }
         }
-
     }
 
     post {
@@ -50,4 +48,3 @@ pipeline {
         }
     }
 }
-v
