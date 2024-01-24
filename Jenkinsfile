@@ -1,6 +1,5 @@
 pipeline {
-    agent {label "jenkins_slave1_pynode"}
-
+    agent { label "jenkins_slave1_pynode" }
 
     stages {
         stage('Checkout') {
@@ -12,6 +11,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    echo 'Stopping all Docker containers...'
+                    // sh 'docker stop $(docker ps -q)'
                     echo 'Building Docker image...'
                     sh 'docker build -t shravani10k/hey-python-flask:0.0.1.RELEASE .'
                 }
@@ -22,12 +23,8 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
-                    sh 'docker exec -it hey-python-flask /bin/sh && pip3 install -r requirements.txt'
-                    sh 'pytest -s'
-                    // docker.image('shravani10k/hey-python-flask:0.0.1.RELEASE').inside {
-                    //     sh 'pip3 install -r requirements.txt'
-                    //     sh 'pytest -s'
-                    // }
+                    sh 'if [ -z "$(docker ps -q -f name=hey-python-flask)" ]; then docker container start hey-python-flask; fi'
+                    sh 'docker exec -i hey-python-flask sh -c "pip3 install -r requirements.txt && pytest -s"'
                 }
             }
         }
